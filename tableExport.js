@@ -454,13 +454,13 @@
           return base64encode(docFile);
 
         try {
-          var blob = new Blob([docFile], {type: 'application/vnd.ms-' + defaults.type});
-          saveAs(blob, defaults.fileName + '.' + MSDocExt);
+          base64 = base64encode(docFile);
+          Venki.DownloadFile('data:application/vnd.ms-' + MSDocType + ';base64,' + base64, 
+          defaults.fileName + '.' + MSDocExt);
         }
         catch (e) {
-          downloadFile(defaults.fileName + '.' + MSDocExt,
-                       'data:application/vnd.ms-' + MSDocType + ';base64,',
-                       docFile);
+          var blob = new Blob([docFile], {type: 'application/vnd.ms-' + defaults.type});
+          saveAs(blob, defaults.fileName + '.' + MSDocExt);
         }
 
       } else if (defaults.type == 'png') {
