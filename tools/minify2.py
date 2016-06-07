@@ -26,7 +26,7 @@ import httplib, urllib, sys, os
 
 fmRootFolder = os.path.dirname(os.path.dirname(os.path.realpath(__file__))) + "/"
 
-os.chdir(fmRootFolder + "scripts/") # set working directory
+os.chdir(fmRootFolder) # set working directory
 
 toMinify = ["tableExport.js"]
 
