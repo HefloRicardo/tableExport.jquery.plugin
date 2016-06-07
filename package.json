@@ -1,6 +1,6 @@
 {
   "name": "tableExport.jquery.plugin",
-  "version": "1.5.1",
+  "version": "2.5.1",
   "description": "html table export",
   "main": "tableExport.min.js",
   "dependencies": {
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/hhurz/tableExport.jquery.plugin"
+    "url": "https://github.com/HefloRicardo/tableExport.jquery.plugin"
   },
   "bugs": {
     "url": "https://github.com/hhurz/tableExport.jquery.plugin/issues"
