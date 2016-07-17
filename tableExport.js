@@ -455,7 +455,7 @@
 
         try {
           base64 = base64encode(docFile);
-          Venki.DownloadFile('data:application/vnd.ms-' + MSDocType + ';base64,' + base64, 
+          Venki.DownloadFile('data:application/vnd.ms-' + MSDocType + ';base64,' + base64,
           defaults.fileName + '.' + MSDocExt);
         }
         catch (e) {
@@ -938,7 +938,7 @@
           return doc.output();
 
         if (defaults.outputMode === 'base64')
-          return base64encode(doc.output());
+          return base64encode(doc.output(), true);
 
         try {
           var blob = doc.output('blob');
@@ -947,7 +947,7 @@
         catch (e) {
           downloadFile(defaults.fileName + '.pdf',
                        'data:application/pdf;base64,',
-                       doc.output());
+                       doc.output(), true);
         }
       }
 
@@ -1217,7 +1217,7 @@
         return 0;
       }
 
-      function downloadFile(filename, header, data) {
+      function downloadFile(filename, header, data, ignoreUTF) {
 
         var ua = window.navigator.userAgent;
         if (ua.indexOf("MSIE ") > 0 || !!ua.match(/Trident.*rv\:11\./)) {
@@ -1246,7 +1246,7 @@
             DownloadLink.download = filename;
 
             if (header.toLowerCase().indexOf("base64,") >= 0)
-              DownloadLink.href = header + base64encode(data);
+              DownloadLink.href = header + base64encode(data, ignoreUTF);
             else
               DownloadLink.href = header + encodeURIComponent(data);
 
@@ -1290,12 +1290,16 @@
         return utftext;
       }
 
-      function base64encode(input) {
+      function base64encode(input, ignoreUTF) {
         var keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
         var output = "";
         var chr1, chr2, chr3, enc1, enc2, enc3, enc4;
         var i = 0;
-        input = utf8Encode(input);
+
+        if (!ignoreUTF) {
+            input = utf8Encode(input);
+        }
+
         while (i < input.length) {
           chr1 = input.charCodeAt(i++);
           chr2 = input.charCodeAt(i++);
