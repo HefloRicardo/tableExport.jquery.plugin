@@ -1077,6 +1077,9 @@
           if (defaults.htmlContent === true) {
             result = $.trim(htmlData);
           }
+          else if (!isNaN(htmlData)) {
+            result = htmlData // do not try to replace on number (or it will not work properly)
+          }
           else {
             var text = htmlData.replace(/\n/g,'\u2028').replace(/<br\s*[\/]?>/gi, '\u2060');
             var obj = $('<div/>').html(text).contents();
